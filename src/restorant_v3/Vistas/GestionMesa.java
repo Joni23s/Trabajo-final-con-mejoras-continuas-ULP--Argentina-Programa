@@ -1,7 +1,10 @@
 package restorant_v3.Vistas;
 
+import java.awt.Color;
+import java.awt.Font;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import restorant_v3.AccesoDatos.MesaData;
 import restorant_v3.Entidades.Mesa;
@@ -18,12 +21,30 @@ public class GestionMesa extends javax.swing.JInternalFrame {
         public boolean isCellEditable(int fila, int columna) {
             return false;
         }
+        
     };
+    public void setEstilo(){
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        Color colorFondo = new Color(214,93,10);      
+        renderer.setBackground(colorFondo);
+        renderer.setForeground(Color.BLACK);
+        renderer.setFont(new Font("Montserrat", Font.BOLD,12));
+
+              for (int i = 0; i < jtablaNew.getColumnCount(); i++) {
+             jtVieja.getColumnModel().getColumn(i).setCellRenderer(renderer);
+        }
+    }
+    
+    
+    
 
     public GestionMesa(JDesktopPane escritorio) {
         this.escritorio = escritorio;
+        
         initComponents();
         armarCabecera();
+         jtVieja.setModel(jtablaNew);
+         setEstilo();
         cargarComboBox();
         //Los botones de buscar y de limpiar, inician no seleccionables, hasta que se den parametros para buscar o borrar
         jbBuscar.setEnabled(false);
@@ -52,11 +73,13 @@ public class GestionMesa extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        setForeground(new java.awt.Color(0, 0, 0));
 
-        jbNuevaMesa.setBackground(new java.awt.Color(102, 204, 102));
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+
+        jbNuevaMesa.setBackground(new java.awt.Color(214, 93, 10));
         jbNuevaMesa.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        jbNuevaMesa.setForeground(java.awt.Color.darkGray);
+        jbNuevaMesa.setForeground(new java.awt.Color(0, 0, 0));
         jbNuevaMesa.setText("Nueva Mesa");
         jbNuevaMesa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,9 +87,9 @@ public class GestionMesa extends javax.swing.JInternalFrame {
             }
         });
 
-        jbVolver.setBackground(new java.awt.Color(102, 204, 102));
+        jbVolver.setBackground(new java.awt.Color(214, 93, 10));
         jbVolver.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        jbVolver.setForeground(java.awt.Color.darkGray);
+        jbVolver.setForeground(new java.awt.Color(0, 0, 0));
         jbVolver.setText("Volver");
         jbVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,17 +97,19 @@ public class GestionMesa extends javax.swing.JInternalFrame {
             }
         });
 
-        jbModificar.setBackground(new java.awt.Color(102, 204, 102));
+        jbModificar.setBackground(new java.awt.Color(214, 93, 10));
         jbModificar.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        jbModificar.setForeground(java.awt.Color.darkGray);
+        jbModificar.setForeground(new java.awt.Color(0, 0, 0));
         jbModificar.setText("Modificar Selección");
+        jbModificar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbModificarActionPerformed(evt);
             }
         });
 
-        jtVieja.setForeground(java.awt.Color.darkGray);
+        jtVieja.setBackground(new java.awt.Color(214, 93, 10));
+        jtVieja.setForeground(new java.awt.Color(255, 255, 255));
         jtVieja.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -98,9 +123,9 @@ public class GestionMesa extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(jtVieja);
 
-        jbBuscar.setBackground(new java.awt.Color(102, 204, 102));
+        jbBuscar.setBackground(new java.awt.Color(214, 93, 10));
         jbBuscar.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        jbBuscar.setForeground(java.awt.Color.darkGray);
+        jbBuscar.setForeground(new java.awt.Color(0, 0, 0));
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,9 +133,9 @@ public class GestionMesa extends javax.swing.JInternalFrame {
             }
         });
 
-        jbLimpiar.setBackground(new java.awt.Color(102, 204, 102));
+        jbLimpiar.setBackground(new java.awt.Color(214, 93, 10));
         jbLimpiar.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        jbLimpiar.setForeground(java.awt.Color.darkGray);
+        jbLimpiar.setForeground(new java.awt.Color(0, 0, 0));
         jbLimpiar.setText("Limpiar");
         jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,8 +143,8 @@ public class GestionMesa extends javax.swing.JInternalFrame {
             }
         });
 
-        jcbCapacidad.setBackground(new java.awt.Color(102, 204, 102));
-        jcbCapacidad.setForeground(java.awt.Color.darkGray);
+        jcbCapacidad.setBackground(new java.awt.Color(214, 93, 10));
+        jcbCapacidad.setForeground(new java.awt.Color(0, 0, 0));
         jcbCapacidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbCapacidadActionPerformed(evt);
@@ -127,11 +152,12 @@ public class GestionMesa extends javax.swing.JInternalFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(139, 69, 19));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Por Capacidad");
 
-        jrbFuera.setBackground(new java.awt.Color(102, 204, 102));
-        jrbFuera.setForeground(java.awt.Color.darkGray);
+        jrbFuera.setBackground(new java.awt.Color(0, 0, 0));
+        jrbFuera.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        jrbFuera.setForeground(new java.awt.Color(255, 255, 255));
         jrbFuera.setText("Fuera de servicio");
         jrbFuera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,8 +165,9 @@ public class GestionMesa extends javax.swing.JInternalFrame {
             }
         });
 
-        jrbServicio.setBackground(new java.awt.Color(102, 204, 102));
-        jrbServicio.setForeground(java.awt.Color.darkGray);
+        jrbServicio.setBackground(new java.awt.Color(0, 0, 0));
+        jrbServicio.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        jrbServicio.setForeground(new java.awt.Color(255, 255, 255));
         jrbServicio.setText("En servicio");
         jrbServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,12 +176,13 @@ public class GestionMesa extends javax.swing.JInternalFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(139, 69, 19));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Por Estado");
 
-        jLabel3.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel3.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(214, 93, 10));
         jLabel3.setText("Administración de Mesas");
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -163,55 +191,52 @@ public class GestionMesa extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(56, 56, 56)
-                                        .addComponent(jrbServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(52, 52, 52)
-                                        .addComponent(jcbCapacidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jrbFuera)
-                            .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(247, 247, 247)
+                        .addGap(197, 197, 197)
                         .addComponent(jbModificar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jbNuevaMesa)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(68, Short.MAX_VALUE))
+                                .addComponent(jbVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(94, 94, 94)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jrbServicio)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jrbFuera))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(68, 68, 68)
+                                .addComponent(jcbCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(52, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(150, 150, 150))
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(129, 129, 129))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addGap(46, 46, 46)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
                     .addComponent(jrbServicio)
-                    .addComponent(jrbFuera))
-                .addGap(24, 24, 24)
+                    .addComponent(jrbFuera)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jcbCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbBuscar)
@@ -224,7 +249,7 @@ public class GestionMesa extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevaMesa)
                     .addComponent(jbVolver))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -274,6 +299,7 @@ public class GestionMesa extends javax.swing.JInternalFrame {
         jbModificar.setEnabled(false);
         //Borramos las filas de la tabla
         jtablaNew.setRowCount(0);
+
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
@@ -283,7 +309,7 @@ public class GestionMesa extends javax.swing.JInternalFrame {
         int fSelec = jtVieja.getSelectedRow();
         if (fSelec != -1) {
             int nMesaSelec = (int) jtablaNew.getValueAt(fSelec, 0);
-
+        
             Mesa m = md.mostrarMesaSegunNumero(nMesaSelec);
             mdm.setDato(m);
             mdm.setVisible(true);
@@ -326,6 +352,7 @@ public class GestionMesa extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         jtablaNew.setRowCount(0); //Esto limpia la tabla
+
         jbModificar.setEnabled(true); //Pone visible al boton modificar
 
         boolean enServicio = jrbServicio.isSelected();
@@ -410,7 +437,8 @@ public class GestionMesa extends javax.swing.JInternalFrame {
         jtablaNew.addColumn("Capacidad");
         jtablaNew.addColumn("Estado");
         jtVieja.setModel(jtablaNew);
-
+        
+  
     }
 
     private void cargarComboBox() {
