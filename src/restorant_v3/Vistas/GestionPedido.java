@@ -1,5 +1,7 @@
 package restorant_v3.Vistas;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.util.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -7,6 +9,7 @@ import java.time.ZoneId;
 import java.util.List;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import restorant_v3.AccesoDatos.MesaData;
 import restorant_v3.AccesoDatos.MeseroData;
@@ -25,11 +28,23 @@ public class GestionPedido extends javax.swing.JInternalFrame {
     MeseroData meseroData = new MeseroData();
     PedidoData pedidoData = new PedidoData();
 
-    DefaultTableModel modelo = new DefaultTableModel() {
+    DefaultTableModel jtNueva = new DefaultTableModel() {
         public boolean isCellEditable(int fila, int columna) {
             return false;
         }
     };
+    
+    public void setEstilo(){
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        Color colorFondo = new Color(214,93,10);      
+        renderer.setBackground(colorFondo);
+        renderer.setForeground(Color.BLACK);
+        renderer.setFont(new Font("Montserrat", Font.BOLD,12));
+
+              for (int i = 0; i < jtNueva.getColumnCount(); i++) {
+             jtVieja.getColumnModel().getColumn(i).setCellRenderer(renderer);
+        }
+    }
 
     private final JDesktopPane escritorio;
 
@@ -37,6 +52,7 @@ public class GestionPedido extends javax.swing.JInternalFrame {
         this.escritorio = escritorio;
         initComponents();
         armarCabecera();
+        setEstilo();
         cargarComboMesa();
         cargarComboMesero();
 
@@ -65,7 +81,7 @@ public class GestionPedido extends javax.swing.JInternalFrame {
         jcbMesero = new javax.swing.JComboBox<>();
         jcbMesa = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtPedidos = new javax.swing.JTable();
+        jtVieja = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         jbNuevoPedido = new javax.swing.JButton();
         jbLimpiar = new javax.swing.JButton();
@@ -88,7 +104,7 @@ public class GestionPedido extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(214, 93, 10));
         jLabel1.setText("GESTION  DE  PEDIDO");
 
-        jLabel3.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Por Fecha");
 
@@ -112,7 +128,7 @@ public class GestionPedido extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Por Estado");
 
@@ -134,7 +150,7 @@ public class GestionPedido extends javax.swing.JInternalFrame {
             }
         });
 
-        jtPedidos.setModel(new javax.swing.table.DefaultTableModel(
+        jtVieja.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -145,9 +161,9 @@ public class GestionPedido extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jtPedidos);
+        jScrollPane1.setViewportView(jtVieja);
 
-        jLabel9.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Por Mesa");
 
@@ -191,7 +207,7 @@ public class GestionPedido extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Por Mesero");
 
@@ -251,6 +267,7 @@ public class GestionPedido extends javax.swing.JInternalFrame {
 
         jdcFecha.setBackground(new java.awt.Color(214, 93, 10));
         jdcFecha.setForeground(new java.awt.Color(0, 0, 0));
+        jdcFecha.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
 
         jLabel2.setBackground(new java.awt.Color(204, 204, 204));
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -269,14 +286,9 @@ public class GestionPedido extends javax.swing.JInternalFrame {
                 .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 25, Short.MAX_VALUE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(54, 54, 54))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 46, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -296,7 +308,7 @@ public class GestionPedido extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(111, 111, 111)
                                 .addComponent(jLabel5)))
-                        .addContainerGap(56, Short.MAX_VALUE))
+                        .addContainerGap(76, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -312,7 +324,8 @@ public class GestionPedido extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6))
                                 .addGap(44, 44, 44)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jcbMesero, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -327,8 +340,8 @@ public class GestionPedido extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(61, 61, 61)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(126, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(94, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,8 +395,8 @@ public class GestionPedido extends javax.swing.JInternalFrame {
                     .addComponent(jbSalir))
                 .addGap(49, 49, 49))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(251, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(263, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(111, 111, 111)))
         );
@@ -453,11 +466,11 @@ public class GestionPedido extends javax.swing.JInternalFrame {
         ModificadorDpedido mdp = new ModificadorDpedido(escritorio);
         escritorio.add(mdp);
 
-        int filaSeleccionada = jtPedidos.getSelectedRow();
+        int filaSeleccionada = jtVieja.getSelectedRow();
 
         if (filaSeleccionada != -1) {
 
-            int nPediSelec = (int) modelo.getValueAt(filaSeleccionada, 0);
+            int nPediSelec = (int) jtNueva.getValueAt(filaSeleccionada, 0);
 
             Pedido nPedi = pedidoData.buscarPedidoPorId(nPediSelec);
             mdp.recibeDato(nPedi);
@@ -524,14 +537,7 @@ public class GestionPedido extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrbPorMeseroActionPerformed
 
     private void jrbPorFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbPorFechaActionPerformed
-        // TODO add your handling code here:
-//        if (jrbPorFecha.isSelected()) {
-//            jrbPorEstado.setSelected(false);
-//            jrbPorFecha.setSelected(true);
-//            jrbPorMesa.setSelected(false);
-//            jrbPorMesero.setSelected(false);
-//            jdcFecha.setEnabled(true);
-//        }
+
 
         limpiarFiltros();
         jrbPorFecha.setSelected(true);
@@ -582,7 +588,7 @@ public class GestionPedido extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jrbPorMesa;
     private javax.swing.JRadioButton jrbPorMesero;
     private javax.swing.JRadioButton jrbTodosLosPedidos;
-    private javax.swing.JTable jtPedidos;
+    private javax.swing.JTable jtVieja;
     // End of variables declaration//GEN-END:variables
 
     public void cargarComboMesa() {
@@ -603,13 +609,13 @@ public class GestionPedido extends javax.swing.JInternalFrame {
     }
 
     public void armarCabecera() {
-        modelo.addColumn("ID");
-        modelo.addColumn("Mesa");
-        modelo.addColumn("Mesero");
-        modelo.addColumn("Fecha-Hora");
-        modelo.addColumn("Importe");
-        modelo.addColumn("Cobrada");
-        jtPedidos.setModel(modelo);
+        jtNueva.addColumn("ID");
+        jtNueva.addColumn("Mesa");
+        jtNueva.addColumn("Mesero");
+        jtNueva.addColumn("Fecha-Hora");
+        jtNueva.addColumn("Importe");
+        jtNueva.addColumn("Cobrada");
+        jtVieja.setModel(jtNueva);
     }
 
     public void cargarTabla(List<Pedido> listaPedidos) {
@@ -617,7 +623,7 @@ public class GestionPedido extends javax.swing.JInternalFrame {
             int acumulador = 0;
             for (Pedido p : listaPedidos) {
                 String estado = p.isCobrada() ? "Cobrado" : "No cobrado";
-                modelo.addRow(new Object[]{
+                jtNueva.addRow(new Object[]{
                     p.getIdPedido(),
                     p.getMesa().getNumero(),
                     p.getMesero().getNombre(),
@@ -632,7 +638,7 @@ public class GestionPedido extends javax.swing.JInternalFrame {
     }
 
     public void limpiarTabla() {
-        modelo.setRowCount(0);
+        jtNueva.setRowCount(0);
     }
 
     public void limpiarFiltros() {

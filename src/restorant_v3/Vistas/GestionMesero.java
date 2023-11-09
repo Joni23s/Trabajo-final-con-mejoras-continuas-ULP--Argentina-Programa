@@ -45,6 +45,9 @@ public class GestionMesero extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(214, 93, 10));
         jLabel1.setText("MODIFICAR MESERO");
 
+        jcbMeseros.setBackground(new java.awt.Color(214, 93, 10));
+        jcbMeseros.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        jcbMeseros.setForeground(new java.awt.Color(0, 0, 0));
         jcbMeseros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbMeserosActionPerformed(evt);
@@ -185,7 +188,7 @@ public class GestionMesero extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevoMesero)
                     .addComponent(jbVolver))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
