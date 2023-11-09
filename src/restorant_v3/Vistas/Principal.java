@@ -142,7 +142,7 @@ public class Principal extends javax.swing.JFrame {
 
         escritorio.removeAll();
         escritorio.repaint();
-        NuevoProducto gp = new NuevoProducto(escritorio);
+        GestionProducto gp = new GestionProducto(escritorio);
         gp.setVisible(true);
         escritorio.add(gp);
     }//GEN-LAST:event_jMGestionProductosActionPerformed

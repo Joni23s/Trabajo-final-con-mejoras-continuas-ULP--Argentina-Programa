@@ -17,7 +17,7 @@ public class GestionMesa extends javax.swing.JInternalFrame {
 
     private final JDesktopPane escritorio;
     MesaData md = new MesaData();
-    DefaultTableModel jtablaNew = new DefaultTableModel() {
+    DefaultTableModel jtNueva = new DefaultTableModel() {
         public boolean isCellEditable(int fila, int columna) {
             return false;
         }
@@ -30,7 +30,7 @@ public class GestionMesa extends javax.swing.JInternalFrame {
         renderer.setForeground(Color.BLACK);
         renderer.setFont(new Font("Montserrat", Font.BOLD,12));
 
-              for (int i = 0; i < jtablaNew.getColumnCount(); i++) {
+              for (int i = 0; i < jtNueva.getColumnCount(); i++) {
              jtVieja.getColumnModel().getColumn(i).setCellRenderer(renderer);
         }
     }
@@ -39,12 +39,11 @@ public class GestionMesa extends javax.swing.JInternalFrame {
     
 
     public GestionMesa(JDesktopPane escritorio) {
-        this.escritorio = escritorio;
-        
+        this.escritorio = escritorio;        
         initComponents();
         armarCabecera();
-         jtVieja.setModel(jtablaNew);
-         setEstilo();
+         jtVieja.setModel(jtNueva);
+        setEstilo();
         cargarComboBox();
         //Los botones de buscar y de limpiar, inician no seleccionables, hasta que se den parametros para buscar o borrar
         jbBuscar.setEnabled(false);
@@ -90,7 +89,7 @@ public class GestionMesa extends javax.swing.JInternalFrame {
         jbVolver.setBackground(new java.awt.Color(214, 93, 10));
         jbVolver.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         jbVolver.setForeground(new java.awt.Color(0, 0, 0));
-        jbVolver.setText("Volver");
+        jbVolver.setText("Salir");
         jbVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbVolverActionPerformed(evt);
@@ -144,6 +143,7 @@ public class GestionMesa extends javax.swing.JInternalFrame {
         });
 
         jcbCapacidad.setBackground(new java.awt.Color(214, 93, 10));
+        jcbCapacidad.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jcbCapacidad.setForeground(new java.awt.Color(0, 0, 0));
         jcbCapacidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,7 +151,7 @@ public class GestionMesa extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Por Capacidad");
 
@@ -175,13 +175,13 @@ public class GestionMesa extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Por Estado");
 
         jLabel3.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(214, 93, 10));
-        jLabel3.setText("Administración de Mesas");
+        jLabel3.setText("GESTION DE MESAS");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -249,7 +249,7 @@ public class GestionMesa extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevaMesa)
                     .addComponent(jbVolver))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -298,7 +298,7 @@ public class GestionMesa extends javax.swing.JInternalFrame {
         jbLimpiar.setEnabled(false);
         jbModificar.setEnabled(false);
         //Borramos las filas de la tabla
-        jtablaNew.setRowCount(0);
+        jtNueva.setRowCount(0);
 
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
@@ -308,7 +308,7 @@ public class GestionMesa extends javax.swing.JInternalFrame {
 
         int fSelec = jtVieja.getSelectedRow();
         if (fSelec != -1) {
-            int nMesaSelec = (int) jtablaNew.getValueAt(fSelec, 0);
+            int nMesaSelec = (int) jtNueva.getValueAt(fSelec, 0);
         
             Mesa m = md.mostrarMesaSegunNumero(nMesaSelec);
             mdm.setDato(m);
@@ -351,7 +351,7 @@ public class GestionMesa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbVolverActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        jtablaNew.setRowCount(0); //Esto limpia la tabla
+        jtNueva.setRowCount(0); //Esto limpia la tabla
 
         jbModificar.setEnabled(true); //Pone visible al boton modificar
 
@@ -369,7 +369,7 @@ public class GestionMesa extends javax.swing.JInternalFrame {
             } else if (!fueraServicio && !enServicio) {
 
                 md.mostrarMesasxCapacidad(capacidad).stream()
-                        .forEach(m -> jtablaNew.addRow(new Object[]{
+                        .forEach(m -> jtNueva.addRow(new Object[]{
                     m.getNumero(),
                     m.getCapacidad(),
                     m.isEstadoM() ? "En Servicio" : "Fuera de Servicio"
@@ -391,7 +391,7 @@ public class GestionMesa extends javax.swing.JInternalFrame {
         md.mostrarMesasxCapacidad(cap) //este metodo se comunica con la base de datos y llama a todas las mesas con x capacidad que pasmos por parametro
                 .stream() //crea un flujo de datos
                 .filter(m -> m.isEstadoM() == est) //filtra las mesas dejando solo las que cumplan con el estado pasado por parametro "est"
-                .forEach(m -> jtablaNew.addRow(new Object[]{
+                .forEach(m -> jtNueva.addRow(new Object[]{
             m.getNumero(),
             m.getCapacidad(),
             m.isEstadoM() ? "En Servicio" : "Fuera de Servicio" //si el estado de mesa es true la tabla se llenara con "En Servicio" de lo contrario se llenara con "Fuera de Servicio"
@@ -405,7 +405,7 @@ public class GestionMesa extends javax.swing.JInternalFrame {
                 .map(m -> new Object[]{
             m.getNumero(),
             m.getCapacidad(),
-            est ? "En Servicio" : "Fuera de Servicio"}).forEach(jtablaNew::addRow);
+            est ? "En Servicio" : "Fuera de Servicio"}).forEach(jtNueva::addRow);
 
     }
 
@@ -433,10 +433,10 @@ public class GestionMesa extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void armarCabecera() {
-        jtablaNew.addColumn("Numero");
-        jtablaNew.addColumn("Capacidad");
-        jtablaNew.addColumn("Estado");
-        jtVieja.setModel(jtablaNew);
+        jtNueva.addColumn("Numero");
+        jtNueva.addColumn("Capacidad");
+        jtNueva.addColumn("Estado");
+        jtVieja.setModel(jtNueva);
         
   
     }
